@@ -1,0 +1,8 @@
+Main\HypergraphFromCSPHelper.class
+util\CombinationIterator.class
+hypergraph\Edge.class
+constraintTable\Table.class
+hypergraph\Hypergraph.class
+Main\Main.class
+util\PowerSetIterator.class
+Main\MainConvertCSP.class
