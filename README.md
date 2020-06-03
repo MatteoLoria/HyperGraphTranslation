@@ -1,1 +1,1 @@
-# XCSP_Table
+# HyperGraphTranslation
