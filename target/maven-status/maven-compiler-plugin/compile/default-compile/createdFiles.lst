@@ -1,5 +1,6 @@
 Main\HypergraphFromCSPHelper.class
 util\CombinationIterator.class
+domain\Domain.class
 hypergraph\Edge.class
 constraintTable\Table.class
 hypergraph\Hypergraph.class

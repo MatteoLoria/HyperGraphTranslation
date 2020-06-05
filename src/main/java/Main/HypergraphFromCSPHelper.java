@@ -8,10 +8,14 @@ import java.util.*;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import constraintTable.Table;
+import domain.Domain;
 import org.tukaani.xz.LZMAInputStream;
 import org.w3c.dom.Document;
+import org.xcsp.common.Condition;
 import org.xcsp.common.Types.TypeFlag;
 import org.xcsp.parser.callbacks.XCallbacks2;
+import org.xcsp.parser.entries.ParsingEntry;
+import org.xcsp.parser.entries.XVariables;
 import org.xcsp.parser.entries.XVariables.XVarInteger;
 
 import hypergraph.Edge;
@@ -23,6 +27,7 @@ public class HypergraphFromCSPHelper implements XCallbacks2 {
 	private Hypergraph H = new Hypergraph();
 	private int iEdge = 0;
 	private ArrayList<Table> tables = new ArrayList<>();
+	private Domain domain = new Domain();
 
 	public HypergraphFromCSPHelper(String filename) throws Exception {
 		loadInstance(filename);
@@ -39,6 +44,10 @@ public class HypergraphFromCSPHelper implements XCallbacks2 {
 
 	public ArrayList<Table> getTables() {
 		return tables;
+	}
+
+	public Domain getDomain() {
+		return domain;
 	}
 
 	@Override
@@ -63,6 +72,7 @@ public class HypergraphFromCSPHelper implements XCallbacks2 {
 
 	@Override
 	public void buildVarInteger(XVarInteger xx, int[] values) {
+		domain.addVar(xx.toString(), values);
 		String x = xx.id;
 		mapVar.put(xx, x);
 	}

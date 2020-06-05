@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import constraintTable.Table;
+import domain.Domain;
 import hypergraph.Hypergraph;
 
 public class MainConvertCSP {
@@ -41,6 +42,7 @@ public class MainConvertCSP {
 
 				Hypergraph H = csp2hg.getHypergraph();
 				ArrayList<Table> tables = csp2hg.getTables();
+				Domain domain = csp2hg.getDomain();
 
 				System.out.println("++ Output");
 				String path = file.getPath();
@@ -61,6 +63,15 @@ public class MainConvertCSP {
 					e.printStackTrace();
 				} finally {
 					outTables.close();
+				}
+
+				BufferedWriter outDomain = new BufferedWriter(new FileWriter("output/" + path.substring(0, path.lastIndexOf(".")) + "domain.hg"));
+				try {
+					domain.toFile(outDomain);
+				} catch (IOException e) {
+					e.printStackTrace();
+				} finally {
+					outDomain.close();
 				}
 			}
 		}
