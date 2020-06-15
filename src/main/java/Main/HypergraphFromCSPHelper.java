@@ -66,13 +66,18 @@ public class HypergraphFromCSPHelper implements XCallbacks2 {
 
 	@Override
 	public void buildVarInteger(XVarInteger xx, int minValue, int maxValue) {
+		int[] temp = new int[maxValue+1];
+		for (int i = minValue; i <= maxValue; ++i) {
+			temp[i] = i;
+		}
+		domain.addVar(stringify(xx), temp);
 		String x = xx.id;
 		mapVar.put(xx, x);
 	}
 
 	@Override
 	public void buildVarInteger(XVarInteger xx, int[] values) {
-		domain.addVar(xx.toString(), values);
+		domain.addVar(stringify(xx), values);
 		String x = xx.id;
 		mapVar.put(xx, x);
 	}
@@ -108,7 +113,7 @@ public class HypergraphFromCSPHelper implements XCallbacks2 {
 		}
 		ArrayList<String> possibleValues = new ArrayList<>();
 		for (XVarInteger xVarInteger : list) {
-			possibleValues.add(xVarInteger.toString());
+			possibleValues.add(stringify(xVarInteger));
 		}
 		table.addPossibleValues(possibleValues);
 		for (int i = 0; i < tuples.length; ++i) {
@@ -119,6 +124,13 @@ public class HypergraphFromCSPHelper implements XCallbacks2 {
 			table.addPossibleValues(possibleValues);
 		}
 		tables.add(table);
+	}
+
+	private String stringify(XVarInteger xVarInteger) {
+		String e = xVarInteger.toString();
+		e = e.replace("[", "L");
+		e = e.replace("]", "J");
+		return e;
 	}
 
 }
