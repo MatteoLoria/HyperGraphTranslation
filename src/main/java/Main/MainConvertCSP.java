@@ -45,8 +45,15 @@ public class MainConvertCSP {
 				Domain domain = csp2hg.getDomain();
 
 				System.out.println("++ Output");
+
 				String path = file.getPath();
-				String hypergraphFile = "output" + path.substring(0, path.lastIndexOf("."))+"\\" + path.substring(0, path.lastIndexOf(".")) + "hypergraph.hg";
+				String outputName = "";
+				if (path.contains("\\"))
+					outputName = "output" + path.substring(path.lastIndexOf("\\")+1, path.lastIndexOf("."))+"\\";
+				else
+					outputName = "output" + path.substring(0, path.lastIndexOf("."))+"\\";
+				System.out.println(outputName);
+				String hypergraphFile = outputName + path.substring(0, path.lastIndexOf(".")) + "hypergraph.hg";
 
 				Path newFilePath = Paths.get(hypergraphFile);
 				Files.createDirectories(newFilePath.getParent());
@@ -54,7 +61,7 @@ public class MainConvertCSP {
 					Files.createFile(newFilePath);
 				Files.write(Paths.get(hypergraphFile), H.toFile(), Charset.forName("UTF-8"));
 
-				BufferedWriter outTables = new BufferedWriter(new FileWriter("output" + path.substring(0, path.lastIndexOf("."))+"\\" + path.substring(0, path.lastIndexOf(".")) + "tables.hg"));
+				BufferedWriter outTables = new BufferedWriter(new FileWriter(outputName + path.substring(0, path.lastIndexOf(".")) + "tables.hg"));
 				try {
 					for (Table t : tables) {
 						t.toFile(outTables);
@@ -65,7 +72,7 @@ public class MainConvertCSP {
 					outTables.close();
 				}
 
-				BufferedWriter outDomain = new BufferedWriter(new FileWriter("output" + path.substring(0, path.lastIndexOf("."))+"\\" + path.substring(0, path.lastIndexOf(".")) + "domain.hg"));
+				BufferedWriter outDomain = new BufferedWriter(new FileWriter(outputName + path.substring(0, path.lastIndexOf(".")) + "domain.hg"));
 				try {
 					domain.toFile(outDomain);
 				} catch (IOException e) {
