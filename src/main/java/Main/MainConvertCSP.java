@@ -48,10 +48,10 @@ public class MainConvertCSP {
 
 				String path = file.getPath();
 				String outputName = "";
-				if (path.contains("\\"))
-					outputName = "output" + path.substring(path.lastIndexOf("\\")+1, path.lastIndexOf("."))+"\\";
+				if (path.contains(File.separator))
+					outputName = "output" + path.substring(path.lastIndexOf(File.separator)+1, path.lastIndexOf("."))+File.separator;
 				else
-					outputName = "output" + path.substring(0, path.lastIndexOf("."))+"\\";
+					outputName = "output" + path.substring(0, path.lastIndexOf("."))+File.separator;
 				System.out.println(outputName);
 				String hypergraphFile = outputName + path.substring(0, path.lastIndexOf(".")) + "hypergraph.hg";
 
