@@ -66,9 +66,9 @@ public class HypergraphFromCSPHelper implements XCallbacks2 {
 
 	@Override
 	public void buildVarInteger(XVarInteger xx, int minValue, int maxValue) {
-		int[] temp = new int[maxValue+1];
-		for (int i = minValue; i <= maxValue; ++i) {
-			temp[i] = i;
+		int[] temp = new int[maxValue];
+		for (int i = 0; i < maxValue; ++i) {
+			temp[i] = i + 1;
 		}
 		domain.addVar(stringify(xx), temp);
 		String x = xx.id;
